@@ -368,13 +368,13 @@ static void sn65dsi83_atomic_pre_enable(struct drm_bridge *bridge,
 	default:
 		/*
 		 * Some bridges still don't set the correct
-		 * LVDS bus pixel format, use SPWG24 default
+		 * LVDS bus pixel format, use JEIDA24 default
 		 * format until those are fixed.
 		 */
 		lvds_format_24bpp = true;
-		lvds_format_jeida = false;
+		lvds_format_jeida = true;
 		dev_warn(ctx->dev,
-			 "Unsupported LVDS bus format 0x%04x, please check output bridge driver. Falling back to SPWG24.\n",
+			 "Unsupported LVDS bus format 0x%04x, please check output bridge driver. Falling back to JEIDA24.\n",
 			 bridge_state->output_bus_cfg.format);
 		break;
 	}

@@ -3018,32 +3018,29 @@ static const struct panel_desc kyo_tcg121xglp = {
 	.connector_type = DRM_MODE_CONNECTOR_LVDS,
 };
 
-/*
-static const struct display_timing kyo_tcg070wvlr_timing = {
-	.pixelclock = { 33200000, 33200000, 33200000 },
-	.hactive = { 800, 800, 800 },
-	.hfront_porch = { 64, 64, 64 },
-	.hback_porch = { 64, 64, 64 },
-	.hsync_len = { 128, 128, 128 },
-	.vactive = { 480, 480, 480 },
-	.vfront_porch = { 5, 5, 5 },
-	.vback_porch = { 20, 20, 20 },
-	.vsync_len = { 20, 20, 20 },
-	.flags = DISPLAY_FLAGS_DE_HIGH,
+static const struct drm_display_mode kyo_tcg070wvlr_mode = {
+	.clock = 33200,
+	.hdisplay = 800,
+	.hsync_start = 800 + 64,
+	.hsync_end = 800 + 64 + 120,
+	.htotal = 800 + 64 + 120 + 64,
+	.vdisplay = 480,
+	.vsync_start = 480 + 5,
+	.vsync_end = 480 + 5 + 20,
+	.vtotal = 480 + 5 + 20 + 14,
 };
 
 static const struct panel_desc kyo_tcg070wvlr = {
-	.timings = &kyo_tcg070wvlr_timing,
-	.num_timings = 1,
+	.modes = &kyo_tcg070wvlr_mode,
+	.num_modes = 1,
 	.bpc = 8,
 	.size = {
 		.width = 152,
 		.height = 91,
 	},
-	.bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,
+	.bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_JEIDA,
 	.connector_type = DRM_MODE_CONNECTOR_LVDS,
 };
-*/
 
 static const struct drm_display_mode lemaker_bl035_rgb_002_mode = {
 	.clock = 7000,
@@ -4852,12 +4849,10 @@ static const struct of_device_id platform_of_match[] = {
 	}, {
 		.compatible = "kyo,tcg121xglp",
 		.data = &kyo_tcg121xglp,
-	},
-/*	 {
+	},{
 		.compatible = "kyo,tcg070wvlr",
 		.data = &kyo_tcg070wvlr,
-	},*/
-	{
+	},{
 		.compatible = "lemaker,bl035-rgb-002",
 		.data = &lemaker_bl035_rgb_002,
 	}, {
@@ -5166,59 +5161,6 @@ static const struct panel_desc_dsi boe_tv080wum_nl0 = {
 	.lanes = 4,
 };
 
-/* static const struct display_timing kyo_tcg070wvlr_timing = {
-	.pixelclock = { 33200000, 33200000, 33200000 },
-	.hactive = { 800, 800, 800 },
-	.hfront_porch = { 64, 64, 64 },
-	.hback_porch = { 64, 64, 64 },
-	.hsync_len = { 128, 128, 128 },
-	.vactive = { 480, 480, 480 },
-	.vfront_porch = { 5, 5, 5 },
-	.vback_porch = { 20, 20, 20 },
-	.vsync_len = { 20, 20, 20 },
-	.flags = DISPLAY_FLAGS_DE_HIGH,
-}; */
-
-static const struct drm_display_mode kyo_tcg070wvlr_mode = {
-	.clock = 332000,
-	.hdisplay = 800,
-	.hsync_start = 800 + 64,
-	.hsync_end = 800 + 64 + 120,
-	.htotal = 800 + 64 + 120 + 64,
-	.vdisplay = 480,
-	.vsync_start = 480 + 5,
-	.vsync_end = 480 + 5 + 20,
-	.vtotal = 480 + 5 + 20 + 14,
-};
-
-/* static const struct panel_desc kyo_tcg070wvlr = {
-	.timings = &kyo_tcg070wvlr_timing,
-	.num_timings = 1,
-	.bpc = 8,
-	.size = {
-		.width = 152,
-		.height = 91,
-	},
-	.bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,
-	.connector_type = DRM_MODE_CONNECTOR_LVDS,
-}; */
-
-static const struct panel_desc_dsi kyo_tcg070wvlr = {
-	.desc = {
-		.modes = &kyo_tcg070wvlr_mode ,
-		.num_modes = 1,
-		.bpc = 8,
-		.size = {
-			.width = 151,
-			.height = 91,
-		},
-		.connector_type = DRM_MODE_CONNECTOR_DSI,
-	},
-	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_CLOCK_NON_CONTINUOUS,
-	.format = MIPI_DSI_FMT_RGB888,
-	.lanes = 2,
-};
-
 static const struct drm_display_mode lg_ld070wx3_sl01_mode = {
 	.clock = 71000,
 	.hdisplay = 800,
@@ -5370,12 +5312,7 @@ static const struct of_device_id dsi_of_match[] = {
 	}, {
 		.compatible = "boe,tv080wum-nl0",
 		.data = &boe_tv080wum_nl0
-	},
-	{
-		.compatible = "kyo,tcg070wvlr",
-		.data = &kyo_tcg070wvlr,
-	},
-	{
+	}, {
 		.compatible = "lg,ld070wx3-sl01",
 		.data = &lg_ld070wx3_sl01
 	}, {
